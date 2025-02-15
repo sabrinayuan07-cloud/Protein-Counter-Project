@@ -2,12 +2,12 @@ package model;
 
 import java.util.ArrayList;
 
+// Represents the food items available for user to choose from
 public class Menu {
     private ArrayList<Food> itemList;
 
     public Menu() {
         itemList = new ArrayList<Food>();
-
         itemList.add(new Food ("Chicken breast", 31));
         itemList.add(new Food ("Eggs", 13));
         itemList.add(new Food ("Milk", 3.3));
@@ -22,5 +22,8 @@ public class Menu {
         itemList.add(new Food ("Avocado", 2));
         itemList.add(new Food ("Banana", 1.1));
         itemList.add(new Food ("Tomatoes", 0.9));
+        itemList.add(new Food ("Bacon", 37));
+        itemList.add(new Food ("Cottage Cheese", 11));
+        
     }   
 }

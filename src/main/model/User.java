@@ -26,10 +26,11 @@ public class User {
     }
 
     // REQUIRES: proteinGoal > 0
-    // MODIFIES:
-    // EFFECTS: 
-    public void progress() {
-
+    // MODIFIES: this
+    // EFFECTS: outputs protein progress (in %) achieved based on proteinGoal
+    public int progress() {
+        return 0;
+        // stub
     }
 }
 
