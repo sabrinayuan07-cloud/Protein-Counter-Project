@@ -10,19 +10,23 @@ public class User {
     }
 
     public String getName() {
-        return this.name;
+        return null;
+        // stub
     }
 
     public double getProteinGoal() {
-        return this.proteinGoal;
+        return 0;
+        // stub
     }
 
     public void setName(String newName) {
-        this.name = newName;
+        this.name = "";
+        // stub
     }
 
     public void setProteinGoal(double newProteinGoal) {
-        this.proteinGoal = newProteinGoal;
+        this.proteinGoal = 0;
+        // stub
     }
 
     // REQUIRES: proteinGoal > 0
