@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ public class MealPlan {
         this.proteinGoal = proteinGoal; // protein goal for each day
     }
 
+    // EFFECTS: returns quantity eaten of a food, if food has not been eaten, return 0 
     public double getFoodQuantity(Food food) {
         if (!foodEaten.containsKey(food)) {
             return 0;
@@ -24,14 +26,22 @@ public class MealPlan {
         }
     }
 
+    // EFFECTS: returns list of all Food items that have been eaten
+    // if empty, returns empty list
+    public ArrayList<Food> getAllFoodEaten() {
+        return new ArrayList<Food>(foodEaten.keySet());
+    }
+
     // REQUIRES: food != null and quantity > 0
     // MODIFIES: this
     // EFFECTS: adds Food item to the HashMap of today's meals
-    public void addFood(Food food, double quantity) {
-        if (foodEaten.containsKey(food)) {
-            foodEaten.put(food, foodEaten.get(food) + quantity);
-        } else {
-            foodEaten.put(food, quantity);
+    public void addFood(Food food, double grams) {
+        if (grams > 0) {
+            if (foodEaten.containsKey(food)) {
+                foodEaten.put(food, foodEaten.get(food) + grams);
+            } else {
+                foodEaten.put(food, grams);
+            }
         }
     }
 
@@ -42,8 +52,7 @@ public class MealPlan {
     public double calculateProtein() {
         double totalProtein = 0;
         for (Map.Entry<Food, Double> item : foodEaten.entrySet()) {
-            System.out.println("Food: " + item.getKey().getName() + ", Quantity: " + item.getValue());
-            totalProtein += item.getKey().getProteinCountPerHundredGrams() * item.getValue();
+            totalProtein += (item.getKey().getProteinCountPerHundredGrams() / 100) * item.getValue();
         }
         return totalProtein;
     }
@@ -51,9 +60,13 @@ public class MealPlan {
     // REQUIRES: proteinGoal > 0
     // MODIFIES: this
     // EFFECTS: outputs protein progress (in %) achieved based on proteinGoal
-    public double getProgressPourcentage() {
-        double progress = (calculateProtein() / getProteinGoal()) * 100;
-        return progress;
+    public int getProgressPourcentage() {
+        int progress = (int) Math.round((calculateProtein() / getProteinGoal()) * 100);
+        if (progress > 100) {
+            return 100;
+        } else {
+            return progress;
+        }
     }
 
     public String getName() {
