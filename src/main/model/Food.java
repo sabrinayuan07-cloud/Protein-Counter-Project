@@ -11,24 +11,18 @@ public class Food {
     }
 
     public String getName() {
-        return null;
-        // stub
+        return this.name;
     }
     
     public double getProteinCountPerHundredGrams() {
-        return 0;
-        // stub
+        return this.proteinCountPerHundredGrams;
     }
 
     public void setName(String name) {
-        this.name = "";
-        // stub
+        this.name = name;
     }
 
     public void setProteinCountPerHundredGrams(double protein) {
-        this.proteinCountPerHundredGrams = 0;
-        // stub
+        this.proteinCountPerHundredGrams = protein;
     }
-
-    
 }

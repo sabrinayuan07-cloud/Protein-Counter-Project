@@ -5,12 +5,14 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Before;
+
 public class TestFood {
     private Food testFoodBacon;
     private Food testFoodShrimp;
 
-    @BeforeEach
-    void runBefore() {
+    @Before
+    public void runBefore() {
         testFoodBacon = new Food("Bacon", 37);
         testFoodShrimp = new Food("Shrimp", 20);
     }
@@ -18,7 +20,6 @@ public class TestFood {
     @Test
     public void testConstructor() {
         Food testFood1 = new Food("1", 10);
-        assertTrue(testFood1 != null);
         assertEquals(testFood1.getName(), "1");
         assertEquals(testFood1.getProteinCountPerHundredGrams(), 10);
     }
@@ -30,7 +31,6 @@ public class TestFood {
 
     @Test
     public void testGetProteinCountPerHundredGrams() {
-        assertTrue(testFoodBacon.getProteinCountPerHundredGrams() != 0);
         assertEquals(testFoodBacon.getProteinCountPerHundredGrams(), 37);
     }
 

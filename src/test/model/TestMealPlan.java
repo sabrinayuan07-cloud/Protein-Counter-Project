@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +12,7 @@ public class TestMealPlan {
     private Food testFoodSalmon;
     private Food testFoodTofu;
 
-    @BeforeEach
+    @Before
     public void runBefore() {
         mealPlanTest = new MealPlan("Savannah", 120);
         testFoodSalmon = new Food("Salmon", 22);
@@ -21,10 +22,8 @@ public class TestMealPlan {
     @Test
     public void testConstructor() {
         MealPlan mealPlan1 = new MealPlan("Julia",90);
-        assertTrue(mealPlan1 != null);
         assertEquals(mealPlan1.getName(), "Julia");
         assertEquals(mealPlan1.getProteinGoal(), 90);
-        assertTrue(mealPlan1 != null);
     }
 
     @Test
@@ -63,4 +62,22 @@ public class TestMealPlan {
         assertEquals(mealPlanTest.getProgressPourcentage(), progress2);
     }
 
+    @Test
+    public void testSetName() {
+        assertEquals(mealPlanTest.getName(), "Savannah");
+        mealPlanTest.setName("Lola");
+        assertEquals(mealPlanTest.getName(), "Lola");
+    }
+
+    @Test
+    public void testGetProteinGoal() {
+        assertEquals(mealPlanTest.getProteinGoal(), 120);
+    }
+
+    @Test
+    public void testSetProteinGoal() {
+        assertEquals(mealPlanTest.getProteinGoal(), 120);
+        mealPlanTest.setProteinGoal(140);
+        assertEquals(mealPlanTest.getProteinGoal(), 140);
+    }
 }
