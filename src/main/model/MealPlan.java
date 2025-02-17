@@ -17,7 +17,7 @@ public class MealPlan {
         this.proteinGoal = proteinGoal; // protein goal for each day
     }
 
-    // EFFECTS: returns quantity eaten of a food, if food has not been eaten, return 0 
+    // EFFECTS: returns nb of grams eaten of X food, if food has not been eaten, return 0 
     public double getFoodQuantity(Food food) {
         if (!foodEaten.containsKey(food)) {
             return 0;
@@ -32,7 +32,7 @@ public class MealPlan {
         return new ArrayList<Food>(foodEaten.keySet());
     }
 
-    // REQUIRES: food != null and quantity > 0
+    // REQUIRES: food != null and grams > 0
     // MODIFIES: this
     // EFFECTS: adds Food item to the HashMap of today's meals
     public void addFood(Food food, double grams) {
@@ -45,7 +45,6 @@ public class MealPlan {
         }
     }
 
-    // REQUIRES: value > 0
     // MODIFIES: this
     // EFFECTS: calculates protein intake of the food eaten and adds it to the total protein intake of the day
     // returns total protein intake of the day

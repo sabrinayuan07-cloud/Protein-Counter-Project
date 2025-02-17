@@ -1,7 +1,6 @@
 package ui;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.Food;
@@ -26,8 +25,9 @@ public class ProteinCounterApp {
         displayMenu();
     }
 
+    // REQUIRES: proteinGoal > 0
     // MODIFIES: this
-    // EFFECTS: initializes protein couter application, displays food selection,
+    // EFFECTS: initializes protein couter application
     // and asks for user name and protein goal
     private void init() {
         input = new Scanner(System.in);
@@ -45,7 +45,6 @@ public class ProteinCounterApp {
         foodToChooseFrom.add(new Food("Broccoli", 2.8));
         foodToChooseFrom.add(new Food("Avocado", 2));
         foodToChooseFrom.add(new Food("Banana", 1.1));
-        foodToChooseFrom.add(new Food("Tomatoes", 0.9));
         foodToChooseFrom.add(new Food("Bacon", 37));
 
         System.out.println("Enter your name: ");
@@ -71,8 +70,8 @@ public class ProteinCounterApp {
         mealPlan = new MealPlan(name, proteinGoal);
     }
 
-    // EFFECTS: displays menu of food options to user
-    // MODIFIES:
+    // MODIFIES: this
+    // EFFECTS: displays menu of food options to user and allows user to add food to meal plan
     private void displayMenu() {
         System.out.println("Here is the food selection: ");
         for (Food food : foodToChooseFrom) {
@@ -112,9 +111,7 @@ public class ProteinCounterApp {
         }
     }
 
-    // REQUIRES:
-    // EFFECTS:
-    // MODIFIES:
+    // EFFECTS: returns Food object from foodName, if cannot be found, return null
     private Food getFoodFromName(String foodName) {
         for (Food food : foodToChooseFrom) {
             if (food.getName().toLowerCase().equals(foodName)) {
@@ -124,9 +121,9 @@ public class ProteinCounterApp {
         return null;
     }
 
-    // REQUIRES:
-    // EFFECTS:
-    // MODIFIES:
+    // MODIFIES: this
+    // EFFECTS: print summary of food eaten, total protein and progress and
+    // clears list of foods eaten
     private void printSummary(boolean isReset) {
         System.out.println("Here is a summary of what you ate today");
         ArrayList<Food> foodEaten = mealPlan.getAllFoodEaten();
