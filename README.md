@@ -16,3 +16,5 @@ Why is this project of interest to you?
 - As a user, I want to be able to specific amount of X food I ate
 - As a user, I want to be able to search view my total protein intake and list of food I ate at the end of the day
 - As a user, I want to be able to set a protein intake goal and see my progress throughout the day
+- As a user, I want to be able to save my meal plan of the day on file
+- As a user, I want to be to retrieve my meal plan from file from X day and continue editing it
