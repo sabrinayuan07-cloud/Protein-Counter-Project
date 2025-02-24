@@ -34,23 +34,19 @@ public class ProteinCounterApp {
         input = new Scanner(System.in);
 
         foodToChooseFrom = new ArrayList<Food>();
-        // foodToChooseFrom.add(new Food("Chicken", 31));
-        // foodToChooseFrom.add(new Food("Eggs", 13));
-        // foodToChooseFrom.add(new Food("Milk", 3.3));
-        // foodToChooseFrom.add(new Food("Salmon", 22));
-        // foodToChooseFrom.add(new Food("Beef", 26));
-        // foodToChooseFrom.add(new Food("Shrimp", 20));
-        // foodToChooseFrom.add(new Food("Tofu", 8));
-        // foodToChooseFrom.add(new Food("Oats", 11));
-        // foodToChooseFrom.add(new Food("Pasta", 5));
-        // foodToChooseFrom.add(new Food("Broccoli", 2.8));
-        // foodToChooseFrom.add(new Food("Avocado", 2));
-        // foodToChooseFrom.add(new Food("Banana", 1.1));
-        // foodToChooseFrom.add(new Food("Bacon", 37));
-
-        JsonReader reader = new JsonReader("./data/foodMenu.json");
-        foodToChooseFrom = reader.readListFood();
-        //??????
+        foodToChooseFrom.add(new Food("Chicken", 31));
+        foodToChooseFrom.add(new Food("Eggs", 13));
+        foodToChooseFrom.add(new Food("Milk", 3.3));
+        foodToChooseFrom.add(new Food("Salmon", 22));
+        foodToChooseFrom.add(new Food("Beef", 26));
+        foodToChooseFrom.add(new Food("Shrimp", 20));
+        foodToChooseFrom.add(new Food("Tofu", 8));
+        foodToChooseFrom.add(new Food("Oats", 11));
+        foodToChooseFrom.add(new Food("Pasta", 5));
+        foodToChooseFrom.add(new Food("Broccoli", 2.8));
+        foodToChooseFrom.add(new Food("Avocado", 2));
+        foodToChooseFrom.add(new Food("Banana", 1.1));
+        foodToChooseFrom.add(new Food("Bacon", 37));
 
         System.out.println("Enter your name: ");
         String name = input.next().trim();
