@@ -1,8 +1,14 @@
 package ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import model.Food;
 import model.MealPlan;
@@ -14,10 +20,16 @@ public class ProteinCounterApp {
     private MealPlan mealPlan;
     private ArrayList<Food> foodToChooseFrom;
     private Scanner input;
-    private static final String filePath = "./data/mealplan.json";
+    private static final String JSON_STORE = "./data/mealplan.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the protein counter application
-    public ProteinCounterApp() {
+    public ProteinCounterApp() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        mealPlan = new MealPlan("Sabrina's workroom", 130);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runProteinCounter();
     }
 
@@ -25,8 +37,22 @@ public class ProteinCounterApp {
     // EFFECTS: processes user input
     private void runProteinCounter() {
         init();
+        String loadFile;
         System.out.println("Welcome to your personalized protein counter application " + mealPlan.getName() + "!");
         displayMenu();
+        // while (true) {
+        //     System.out.println("If you want to load a meal plan from file, press \"y\", or else press \"n\": ");
+        //     loadFile = input.next().trim().toLowerCase();
+        //     if (loadFile.equals("y")) {
+        //         loadMealPlan();
+        //         break;
+        //     } else if (loadFile.equals("n")) {
+        //         displayMenu();
+        //         break;
+        //     } else {
+        //         System.out.println("Invalid input, please try again: ");
+        //     }
+        // }
     }
 
     // REQUIRES: proteinGoal > 0
@@ -42,9 +68,6 @@ public class ProteinCounterApp {
         mealPlan = new MealPlan(name, proteinGoal);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
     private double getProteinGoal() {
         double proteinGoal = 0;
         boolean proteinGoalEntered = false;
@@ -96,9 +119,7 @@ public class ProteinCounterApp {
         selectFood();
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // EFFECTS: calls printSummary with reset boolean as parameter
     private void selectFood() {
         String foodSelected = helperSelectFood();
         if (foodSelected.equals("r")) {
@@ -109,6 +130,7 @@ public class ProteinCounterApp {
         }
     }
 
+    // EFFECTS: calls different methods depending on user input
     private String helperSelectFood() {
         String foodSelected;
         while (true) {
@@ -154,6 +176,7 @@ public class ProteinCounterApp {
 
         if (foodEaten.isEmpty()) {
             System.out.println("You have not eaten anything today.");
+            wantToSaveMealPlan();
         } else {
             System.out.println("You have eaten: ");
             for (Food food : foodEaten) {
@@ -167,19 +190,53 @@ public class ProteinCounterApp {
 
         foodEaten.clear();
         if (isReset) {
+            wantToSaveMealPlan();
             System.out.println("Your protein intake has been reset for a new day :)");
         } else {
+            wantToSaveMealPlan();
             System.out.println("Have a nice day :)");
+        }
+    }
+
+    // MODIFIES:
+    // EFFECTS:
+    private void wantToSaveMealPlan() {
+        String save;
+        System.out.println("Do you want to save your meal plan to file? Enter \"y\" or \"n\": ");
+        save = input.next().trim().toLowerCase();
+        while (true) {
+            if (save.equals("y")) {
+                saveMealPlan();
+                break;
+            } else if (save.equals("n")) {
+                System.out.println("You have chosen not to save your meal plan");
+                break;
+            } else {
+                System.out.println("Invalid input, please try again");
+            }
         }
     }
 
     // EFFECTS: saves mealplan to JSON file
     public void saveMealPlan() {
-        // stbu
+        try {
+            jsonWriter.open();
+            jsonWriter.write(mealPlan);
+            jsonWriter.close();
+            System.out.println("Saved " + mealPlan.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
+    // MODIFIES: this
     // EFFECTS: loads mealplan from file if it exists
     public void loadMealPlan() {
-        // stub
+        try {
+            mealPlan = jsonReader.read();
+            System.out.println("Loaded " + mealPlan.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

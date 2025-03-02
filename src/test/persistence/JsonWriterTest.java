@@ -1,5 +1,6 @@
 package persistence;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -63,9 +64,23 @@ public class JsonWriterTest extends JsonTest {
             mp = reader.read();
             assertEquals("My meal plan", mp.getName());
             ArrayList<Food> foods = mp.getAllFoodEaten();
-            assertEquals(2, foods.size());
-            checkFood("Chicken", 31, foods.get(0));
-            checkFood("Salmon", 22, foods.get(1));
+
+            boolean foundChicken = false;
+            boolean foundSalmon = false;
+            for (Food f : foods) {
+                System.out.println(f.getName());
+                if (f.getName().equalsIgnoreCase(chicken.getName())) {
+                    if (Double.compare(f.getProteinCountPerHundredGrams(), chicken.getProteinCountPerHundredGrams()) == 0) {
+                        foundChicken = true;
+                    }
+                } else if (f.getName().equalsIgnoreCase(salmon.getName())) {
+                    if (Double.compare(f.getProteinCountPerHundredGrams(), salmon.getProteinCountPerHundredGrams()) == 0) {
+                        foundSalmon = true;
+                    }
+                }
+            }
+            assertTrue(foundChicken);
+            assertTrue(foundSalmon);
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

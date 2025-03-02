@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 import org.json.JSONObject;
 
 import persistence.Writable;
@@ -17,7 +19,7 @@ public class Food implements Writable {
     public String getName() {
         return this.name;
     }
-    
+
     public double getProteinCountPerHundredGrams() {
         return this.proteinCountPerHundredGrams;
     }
