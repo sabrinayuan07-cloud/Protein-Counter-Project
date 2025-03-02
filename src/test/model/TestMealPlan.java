@@ -4,6 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -14,6 +18,7 @@ public class TestMealPlan {
     private Food testFoodSalmon;
     private Food testFoodTofu;
     private Food testFoodChicken;
+    private String filePath;
 
     @Before
     public void runBefore() {
@@ -21,11 +26,12 @@ public class TestMealPlan {
         testFoodSalmon = new Food("Salmon", 22.5);
         testFoodTofu = new Food("Tofu", 8.3);
         testFoodChicken = new Food("Chicken", 30.1);
+        filePath = "./data/testMealPlan.json";
     }
 
     @Test
     public void testConstructor() {
-        MealPlan mealPlan1 = new MealPlan("Julia",90);
+        MealPlan mealPlan1 = new MealPlan("Julia", 90);
         assertEquals(mealPlan1.getName(), "Julia");
         assertEquals(mealPlan1.getProteinGoal(), 90);
     }
@@ -69,14 +75,15 @@ public class TestMealPlan {
     public void testCalculateProtein() {
         mealPlanTest.addFood(testFoodSalmon, 50);
         mealPlanTest.addFood(testFoodTofu, 20);
-        double proteinCount = ((testFoodSalmon.getProteinCountPerHundredGrams() / 100) * 50) + ((testFoodTofu.getProteinCountPerHundredGrams()/100) * 20);
+        double proteinCount = ((testFoodSalmon.getProteinCountPerHundredGrams() / 100) * 50)
+                + ((testFoodTofu.getProteinCountPerHundredGrams() / 100) * 20);
         assertEquals(mealPlanTest.calculateProtein(), proteinCount);
     }
 
     @Test
     public void testGetProgressPourcentage() {
         mealPlanTest.addFood(testFoodSalmon, 500);
-        double proteinCount = ((testFoodSalmon.getProteinCountPerHundredGrams()/100) * 500);
+        double proteinCount = ((testFoodSalmon.getProteinCountPerHundredGrams() / 100) * 500);
         int progress = (int) Math.round((proteinCount / mealPlanTest.getProteinGoal()) * 100);
         assertEquals(mealPlanTest.getProgressPourcentage(), progress);
         mealPlanTest.addFood(testFoodTofu, 2);
@@ -107,12 +114,29 @@ public class TestMealPlan {
     }
 
     @Test
-    public void testMealPlanToJson() {
+    public void testToJson() {
         mealPlanTest.addFood(testFoodChicken, 100);
         mealPlanTest.addFood(testFoodSalmon, 200);
-        JSONArray jsonArray = mealPlanTest.mealPlanToJson();
-        assertEquals(2, jsonArray.length());
-        assertEquals("Chicken", jsonArray.getJSONObject(0));
-        assertEquals("Salmon", jsonArray.getJSONObject(1));
+        JSONObject jsonObject = mealPlanTest.toJson();
+        JSONArray foodEatenArray = jsonObject.getJSONArray("foodEaten");
+        System.out.println(jsonObject.toString());
+        assertEquals(foodEatenArray.length(), 2);
+
+        try (FileWriter file = new FileWriter("sabrinadata.json")) {
+            file.write(jsonObject.toString(4)); // Pretty-print with indentation
+            System.out.println("JSON file saved successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < foodEatenArray.length(); i++) {
+            JSONObject foodEaten = foodEatenArray.getJSONObject(i); // Get each JSON object
+            JSONObject food = foodEaten.getJSONObject("food");
+            String name = food.getString("name"); // Extract name
+            double protein = food.getDouble("proteinCountPerHundredGrams"); // Extract protein amount
+
+            assertTrue(name == "Chicken" || name == "Salmon");
+            assertTrue(protein == 30.1 || protein == 22.5);
+        }
     }
 }

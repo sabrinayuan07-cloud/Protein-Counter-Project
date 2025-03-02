@@ -1,17 +1,20 @@
 package ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Food;
 import model.MealPlan;
 import persistence.JsonReader;
+import persistence.JsonWriter;
 
 // Protein counter application
 public class ProteinCounterApp {
     private MealPlan mealPlan;
     private ArrayList<Food> foodToChooseFrom;
     private Scanner input;
+    private static final String filePath = "./data/mealplan.json";
 
     // EFFECTS: runs the protein counter application
     public ProteinCounterApp() {
@@ -110,7 +113,7 @@ public class ProteinCounterApp {
         String foodSelected;
         while (true) {
             System.out.println(
-                    "Enter the food you want to add to your meal plan, or press \\\"q\\\" when done," 
+                    "Enter the food you want to add to your meal plan, or press \"q\" when done," 
                     + " press \"p\" to view protein progress and \"r\" when you want " + "to start a new day: ");
             foodSelected = input.next().trim().toLowerCase();
             if (foodSelected.equals("p")) {
@@ -168,5 +171,15 @@ public class ProteinCounterApp {
         } else {
             System.out.println("Have a nice day :)");
         }
+    }
+
+    // EFFECTS: saves mealplan to JSON file
+    public void saveMealPlan() {
+        // stbu
+    }
+
+    // EFFECTS: loads mealplan from file if it exists
+    public void loadMealPlan() {
+        // stub
     }
 }

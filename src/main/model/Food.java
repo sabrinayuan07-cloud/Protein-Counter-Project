@@ -32,7 +32,9 @@ public class Food implements Writable {
 
     @Override
     public JSONObject toJson() {
-        return null;
-        // stub
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("proteinCountPerHundredGrams", proteinCountPerHundredGrams);
+        return json;
     }
 }

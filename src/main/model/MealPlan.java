@@ -22,7 +22,8 @@ public class MealPlan implements Writable {
         this.proteinGoal = proteinGoal; // protein goal for each day
     }
 
-    // EFFECTS: returns nb of grams eaten of X food, if food has not been eaten, return 0 
+    // EFFECTS: returns nb of grams eaten of X food, if food has not been eaten,
+    // return 0
     public double getFoodQuantity(Food food) {
         if (!foodEaten.containsKey(food)) {
             return 0;
@@ -51,7 +52,8 @@ public class MealPlan implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: calculates protein intake of the food eaten and adds it to the total protein intake of the day
+    // EFFECTS: calculates protein intake of the food eaten and adds it to the total
+    // protein intake of the day
     // returns total protein intake of the day
     public double calculateProtein() {
         double totalProtein = 0;
@@ -89,15 +91,23 @@ public class MealPlan implements Writable {
         this.proteinGoal = proteinGoal;
     }
 
+    // EFFECTS: returns things in this mealplan as a JSON array
     @Override
     public JSONObject toJson() {
-        return null;
-        // stub
-    }
-
-     // EFFECTS: returns things in this workroom as a JSON array
-    public JSONArray mealPlanToJson() {
-        return null;
-        // stub
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (Map.Entry<Food, Double> item : foodEaten.entrySet()) {
+            JSONObject foodEatenJson = new JSONObject();
+            JSONObject foodJson = new JSONObject();
+            foodJson.put("name", item.getKey().getName());
+            foodJson.put("proteinCountPerHundredGrams", item.getKey().getProteinCountPerHundredGrams());
+            foodEatenJson.put("food", foodJson);
+            foodEatenJson.put("gramsEaten", item.getValue());
+            jsonArray.put(foodEatenJson);
+        }
+        jsonObject.put("foodEaten", jsonArray);
+        jsonObject.put("name", this.name);
+        jsonObject.put("proteinGoal", this.proteinGoal);
+        return jsonObject;
     }
 }

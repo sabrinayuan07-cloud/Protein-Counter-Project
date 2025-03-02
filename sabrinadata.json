@@ -1,18 +1,18 @@
 {
-    "name": "My meal plan",
+    "name": "Savannah",
     "foodEaten": [
-        {
-            "gramsEaten": 150,
-            "food": {
-                "name": "Salmon",
-                "proteinCountPerHundredGrams": 22
-            }
-        },
         {
             "gramsEaten": 200,
             "food": {
+                "name": "Salmon",
+                "proteinCountPerHundredGrams": 22.5
+            }
+        },
+        {
+            "gramsEaten": 100,
+            "food": {
                 "name": "Chicken",
-                "proteinCountPerHundredGrams": 31
+                "proteinCountPerHundredGrams": 30.1
             }
         }
     ],
