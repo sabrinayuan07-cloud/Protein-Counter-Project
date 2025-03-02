@@ -1,6 +1,7 @@
 package persistence;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class JsonReaderTest extends JsonTest {
         try {
             MealPlan mp = reader.readMealPlan("./data/testReaderEmptyMealPlan.json");
             assertEquals("My meal plan", mp.getName());
+            assertTrue(120 == mp.getProteinGoal());
             assertEquals(null, mp.getFoodQuantity(null));
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -43,6 +45,7 @@ public class JsonReaderTest extends JsonTest {
         try {
             MealPlan mp = reader.readMealPlan("./data/testReaderGeneralMealPlan.json");
             assertEquals("My meal plan", mp.getName());
+            assertTrue(130 == mp.getProteinGoal());
             ArrayList<Food> foods = mp.getAllFoodEaten();
             assertEquals(2, foods.size());
             checkFood("Chicken", 31, foods.get(0));

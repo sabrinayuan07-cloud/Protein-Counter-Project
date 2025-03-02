@@ -1,3 +1,5 @@
 {
-    "meals": []
+    "name": "My meal plan",
+    "proteinGoal": 120,
+    "foodEaten": []
 }
