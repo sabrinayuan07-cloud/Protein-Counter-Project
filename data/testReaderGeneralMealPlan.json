@@ -3,19 +3,18 @@
     "proteinGoal": 130,
     "foodEaten": [
         {
-        "food": {
-            "name": "Chicken",
-            "proteinCountPerHundredGrams": 31.0
-              },
+            "food": {
+                "name": "Chicken",
+                "proteinCountPerHundredGrams": 31.0
+            },
             "gramsEaten": 200
         },
         {
             "food": {
-            "name": "Salmon",
-            "proteinCountPerHundredGrams": 22.0
+                "name": "Salmon",
+                "proteinCountPerHundredGrams": 22.0
             },
             "gramsEaten": 150
         }
     ]
 }
-

@@ -12,6 +12,8 @@ import org.junit.Test;
 import model.Food;
 import model.MealPlan;
 
+// SOURCE: FROM JSON LIBRAIRIES SAMPLE APPLICATION DEMO
+
 public class JsonWriterTest extends JsonTest {
     @Test
     public void testWriterInvalidFile() {
@@ -35,7 +37,7 @@ public class JsonWriterTest extends JsonTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyMealPlan.json");
-            mp = reader.readMealPlan("./data/testWriterEmptyMealPlan.json");
+            mp = reader.read();
             assertEquals("My meal plan", mp.getName());
             assertEquals(120, mp.getProteinGoal());
             assertEquals(0, mp.getAllFoodEaten().size());
@@ -58,7 +60,7 @@ public class JsonWriterTest extends JsonTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralMealPlan.json");
-            mp = reader.readMealPlan("./data/testWriterGeneralMealPlan.json");
+            mp = reader.read();
             assertEquals("My meal plan", mp.getName());
             ArrayList<Food> foods = mp.getAllFoodEaten();
             assertEquals(2, foods.size());

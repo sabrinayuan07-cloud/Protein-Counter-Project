@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents food eaten and calculates its total protein intake
-public class MealPlan {
+public class MealPlan implements Writable {
     // key is Food, value is how many 100grams of food eaten
     private HashMap<Food, Double> foodEaten;
     private String name;
@@ -82,5 +87,27 @@ public class MealPlan {
 
     public void setProteinGoal(int proteinGoal) {
         this.proteinGoal = proteinGoal;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("proteinGoal", proteinGoal);
+        json.put("foodEaten", mealPlanToJson());
+        return json;
+    }
+
+     // EFFECTS: returns things in this workroom as a JSON array
+    public JSONArray mealPlanToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Map.Entry<Food, Double> item : foodEaten.entrySet()) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name", item.getKey());
+            jsonObject.put("proteinCountPerHundredGrams", item.getValue());
+            jsonArray.put(toJson());
+        }
+        return jsonArray;
     }
 }

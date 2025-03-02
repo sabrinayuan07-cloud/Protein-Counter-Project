@@ -13,13 +13,15 @@ import org.junit.Test;
 import model.Food;
 import model.MealPlan;
 
+// SOURCE: FROM JSON LIBRAIRIES SAMPLE APPLICATION DEMO
+
 public class JsonReaderTest extends JsonTest {
 
     @Test
     public void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            MealPlan mp = reader.readMealPlan("./data/noSuchFile.json");
+            MealPlan mp = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -30,10 +32,12 @@ public class JsonReaderTest extends JsonTest {
     public void testReaderEmptyMealPlan() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyMealPlan.json");
         try {
-            MealPlan mp = reader.readMealPlan("./data/testReaderEmptyMealPlan.json");
+            MealPlan mp = reader.read();
             assertEquals("My meal plan", mp.getName());
             assertTrue(120 == mp.getProteinGoal());
-            assertEquals(null, mp.getFoodQuantity(null));
+            Food chicken = new Food("Chicken", 31);
+            assertTrue(0 == mp.getFoodQuantity(chicken));
+            assertTrue(0 == mp.getAllFoodEaten().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
@@ -43,7 +47,7 @@ public class JsonReaderTest extends JsonTest {
     public void testReaderGeneralMealPlan() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralMealPlan.json");
         try {
-            MealPlan mp = reader.readMealPlan("./data/testReaderGeneralMealPlan.json");
+            MealPlan mp = reader.read();
             assertEquals("My meal plan", mp.getName());
             assertTrue(130 == mp.getProteinGoal());
             ArrayList<Food> foods = mp.getAllFoodEaten();

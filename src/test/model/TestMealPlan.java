@@ -4,6 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class TestMealPlan {
     private MealPlan mealPlanTest;
     private Food testFoodSalmon;
@@ -100,4 +105,14 @@ public class TestMealPlan {
         mealPlanTest.setProteinGoal(140);
         assertEquals(mealPlanTest.getProteinGoal(), 140);
     }
+
+    // @Test
+    // public void testMealPlanToJson() {
+    //     mealPlanTest.addFood(testFoodChicken, 100);
+    //     mealPlanTest.addFood(testFoodSalmon, 200);
+    //     JSONArray jsonArray = mealPlanTest.mealPlanToJson();
+    //     assertEquals(2, jsonArray.length());
+    //     assertEquals("Chicken", jsonArray.getJSONObject(0));
+    //     assertEquals("Salmon", jsonArray.getJSONObject(1));
+    // }
 }

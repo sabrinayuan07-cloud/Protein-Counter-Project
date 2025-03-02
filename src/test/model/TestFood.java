@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.json.JSONObject;
 import org.junit.Before;
 
 public class TestFood {
@@ -45,5 +46,12 @@ public class TestFood {
         assertEquals(testFoodBacon.getProteinCountPerHundredGrams(), 37);
         testFoodBacon.setProteinCountPerHundredGrams(30);
         assertEquals(testFoodBacon.getProteinCountPerHundredGrams(), 30);
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject json = testFoodBacon.toJson();
+        assertEquals("Bacon", json.get("name"));
+        assertEquals(37.0, json.get("proteinCountPerHundredGrams"));
     }
 }

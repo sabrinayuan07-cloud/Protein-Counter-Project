@@ -1,0 +1,12 @@
+{
+    "foodEaten": [
+        {
+            "name": "Chicken",
+            "proteinCountPerHundredGrams": 31
+        },
+        {
+            "name": "Eggs",
+            "proteinCountPerHundredGrams": 13
+        }
+    ]
+}
