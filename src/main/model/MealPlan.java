@@ -91,23 +91,13 @@ public class MealPlan implements Writable {
 
     @Override
     public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("name", name);
-        json.put("proteinGoal", proteinGoal);
-        json.put("foodEaten", mealPlanToJson());
-        return json;
+        return null;
+        // stub
     }
 
      // EFFECTS: returns things in this workroom as a JSON array
     public JSONArray mealPlanToJson() {
-        JSONArray jsonArray = new JSONArray();
-
-        for (Map.Entry<Food, Double> item : foodEaten.entrySet()) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("name", item.getKey());
-            jsonObject.put("proteinCountPerHundredGrams", item.getValue());
-            jsonArray.put(toJson());
-        }
-        return jsonArray;
+        return null;
+        // stub
     }
 }

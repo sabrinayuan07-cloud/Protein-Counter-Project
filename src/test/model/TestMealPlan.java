@@ -106,13 +106,13 @@ public class TestMealPlan {
         assertEquals(mealPlanTest.getProteinGoal(), 140);
     }
 
-    // @Test
-    // public void testMealPlanToJson() {
-    //     mealPlanTest.addFood(testFoodChicken, 100);
-    //     mealPlanTest.addFood(testFoodSalmon, 200);
-    //     JSONArray jsonArray = mealPlanTest.mealPlanToJson();
-    //     assertEquals(2, jsonArray.length());
-    //     assertEquals("Chicken", jsonArray.getJSONObject(0));
-    //     assertEquals("Salmon", jsonArray.getJSONObject(1));
-    // }
+    @Test
+    public void testMealPlanToJson() {
+        mealPlanTest.addFood(testFoodChicken, 100);
+        mealPlanTest.addFood(testFoodSalmon, 200);
+        JSONArray jsonArray = mealPlanTest.mealPlanToJson();
+        assertEquals(2, jsonArray.length());
+        assertEquals("Chicken", jsonArray.getJSONObject(0));
+        assertEquals("Salmon", jsonArray.getJSONObject(1));
+    }
 }
