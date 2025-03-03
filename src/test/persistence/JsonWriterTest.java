@@ -70,11 +70,13 @@ public class JsonWriterTest extends JsonTest {
             for (Food f : foods) {
                 System.out.println(f.getName());
                 if (f.getName().equalsIgnoreCase(chicken.getName())) {
-                    if (Double.compare(f.getProteinCountPerHundredGrams(), chicken.getProteinCountPerHundredGrams()) == 0) {
+                    if (Double.compare(f.getProteinCountPerHundredGrams(),
+                            chicken.getProteinCountPerHundredGrams()) == 0) {
                         foundChicken = true;
                     }
                 } else if (f.getName().equalsIgnoreCase(salmon.getName())) {
-                    if (Double.compare(f.getProteinCountPerHundredGrams(), salmon.getProteinCountPerHundredGrams()) == 0) {
+                    if (Double.compare(f.getProteinCountPerHundredGrams(),
+                            salmon.getProteinCountPerHundredGrams()) == 0) {
                         foundSalmon = true;
                     }
                 }

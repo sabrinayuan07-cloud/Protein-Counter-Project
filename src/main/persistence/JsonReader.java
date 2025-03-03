@@ -20,10 +20,10 @@ public class JsonReader {
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
-        this.source = source; 
+        this.source = source;
     }
 
-     // EFFECTS: Reads MealPlan from file and returns it;
+    // EFFECTS: Reads MealPlan from file and returns it;
     // throws IOException if an error occurs reading data from file
     public MealPlan read() throws IOException {
         String jsonData = readFile(source);

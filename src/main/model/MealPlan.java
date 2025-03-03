@@ -101,7 +101,8 @@ public class MealPlan implements Writable {
             JSONObject foodJson = item.getKey().toJson();
             // JSONObject foodJson = new JSONObject();
             // foodJson.put("name", item.getKey().getName());
-            // foodJson.put("proteinCountPerHundredGrams", item.getKey().getProteinCountPerHundredGrams());
+            // foodJson.put("proteinCountPerHundredGrams",
+            // item.getKey().getProteinCountPerHundredGrams());
             foodEatenJson.put("food", foodJson);
             foodEatenJson.put("gramsEaten", item.getValue());
             jsonArray.put(foodEatenJson);

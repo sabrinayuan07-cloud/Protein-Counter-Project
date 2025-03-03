@@ -135,8 +135,9 @@ public class ProteinCounterApp {
         String foodSelected;
         while (true) {
             System.out.println(
-                    "Enter the food you want to add to your meal plan, or press \"q\" when done," 
-                    + " press \"p\" to view protein progress and \"r\" when you want " + "to start a new day: ");
+                    "Enter the food you want to add to your meal plan, or press \"q\" when done,"
+                            + " press \"p\" to view protein progress and \"r\" when you want "
+                            + "to start a new day: ");
             foodSelected = input.next().trim().toLowerCase();
             if (foodSelected.equals("p")) {
                 int progress = mealPlan.getProgressPourcentage();
