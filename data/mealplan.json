@@ -1,5 +1,11 @@
 {
-    "name": "jo",
-    "foodEaten": [],
-    "proteinGoal": 88
+    "name": "jfj",
+    "foodEaten": [{
+        "gramsEaten": 56,
+        "food": {
+            "name": "Shrimp",
+            "proteinCountPerHundredGrams": 20
+        }
+    }],
+    "proteinGoal": 135
 }

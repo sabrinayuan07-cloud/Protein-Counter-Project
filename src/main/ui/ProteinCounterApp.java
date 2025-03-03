@@ -39,20 +39,20 @@ public class ProteinCounterApp {
         init();
         String loadFile;
         System.out.println("Welcome to your personalized protein counter application " + mealPlan.getName() + "!");
-        displayMenu();
-        // while (true) {
-        //     System.out.println("If you want to load a meal plan from file, press \"y\", or else press \"n\": ");
-        //     loadFile = input.next().trim().toLowerCase();
-        //     if (loadFile.equals("y")) {
-        //         loadMealPlan();
-        //         break;
-        //     } else if (loadFile.equals("n")) {
-        //         displayMenu();
-        //         break;
-        //     } else {
-        //         System.out.println("Invalid input, please try again: ");
-        //     }
-        // }
+        while (true) {
+            System.out.println("If you want to load a meal plan from file, press \"y\", or else press \"n\": ");
+            loadFile = input.next().trim().toLowerCase();
+            if (loadFile.equals("y")) {
+                loadMealPlan();
+                displayMenu();
+                break;
+            } else if (loadFile.equals("n")) {
+                displayMenu();
+                break;
+            } else {
+                System.out.println("Invalid input, please try again: ");
+            }
+        }
     }
 
     // REQUIRES: proteinGoal > 0
