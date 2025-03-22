@@ -8,8 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
-import java.util.ArrayList;
-
 import org.json.*;
 
 // SOURCE: FROM JSON LIBRAIRIES SAMPLE APPLICATION DEMO
@@ -69,5 +67,4 @@ public class JsonReader {
         Food food = new Food(foodName, proteinPerHundredGrams);
         mp.addFood(food, gramsEaten);
     }
-
 }

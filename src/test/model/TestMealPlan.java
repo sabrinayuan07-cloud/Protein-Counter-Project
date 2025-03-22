@@ -4,12 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 

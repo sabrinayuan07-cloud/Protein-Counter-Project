@@ -1,14 +1,9 @@
 package ui;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 import model.Food;
 import model.MealPlan;
@@ -36,7 +31,7 @@ public class ProteinCounterApp {
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runProteinCounter() {
-        init();
+        // init();
         String loadFile;
         System.out.println("Welcome to your personalized protein counter application " + mealPlan.getName() + "!");
         while (true) {
@@ -44,9 +39,11 @@ public class ProteinCounterApp {
             loadFile = input.next().trim().toLowerCase();
             if (loadFile.equals("y")) {
                 loadMealPlan();
+                init();
                 displayMenu();
                 break;
             } else if (loadFile.equals("n")) {
+                init();
                 displayMenu();
                 break;
             } else {
@@ -140,8 +137,7 @@ public class ProteinCounterApp {
                             + "to start a new day: ");
             foodSelected = input.next().trim().toLowerCase();
             if (foodSelected.equals("p")) {
-                int progress = mealPlan.getProgressPourcentage();
-                System.out.println("You have now completed " + progress + "% of your protein goal");
+                proteinProgress();
             } else if (getFoodFromName(foodSelected) != null) {
                 System.out.println("Enter the amount of food in grams: ");
                 double quantity = input.nextDouble();
@@ -156,6 +152,22 @@ public class ProteinCounterApp {
             }
         }
         return foodSelected;
+    }
+
+    private void proteinProgress() {
+        int progress = mealPlan.getProgressPourcentage();
+        System.out.println("You have now completed " + progress + "% of your protein goal");
+        ArrayList<Food> foodEaten = mealPlan.getAllFoodEaten();
+
+        if (foodEaten.isEmpty()) {
+            System.out.println("You have not eaten anything yet.");
+        } else {
+            System.out.println("Here is what you ate so far: ");
+            for (Food food : foodEaten) {
+                double quantity = mealPlan.getFoodQuantity(food);
+                System.out.println("- " + quantity + " grams of " + food.getName());
+            }
+        }
     }
 
     // EFFECTS: returns Food object from foodName, if cannot be found, return null
@@ -176,7 +188,7 @@ public class ProteinCounterApp {
         ArrayList<Food> foodEaten = mealPlan.getAllFoodEaten();
 
         if (foodEaten.isEmpty()) {
-            System.out.println("You have not eaten anything today.");
+            System.out.println("You have not eaten anything");
             wantToSaveMealPlan();
         } else {
             System.out.println("You have eaten: ");

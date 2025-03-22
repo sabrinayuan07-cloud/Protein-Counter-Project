@@ -2,17 +2,17 @@
     "name": "Savannah",
     "foodEaten": [
         {
-            "gramsEaten": 200,
-            "food": {
-                "name": "Salmon",
-                "proteinCountPerHundredGrams": 22.5
-            }
-        },
-        {
             "gramsEaten": 100,
             "food": {
                 "name": "Chicken",
                 "proteinCountPerHundredGrams": 30.1
+            }
+        },
+        {
+            "gramsEaten": 200,
+            "food": {
+                "name": "Salmon",
+                "proteinCountPerHundredGrams": 22.5
             }
         }
     ],

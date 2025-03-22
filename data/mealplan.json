@@ -1,11 +1,20 @@
 {
-    "name": "jfj",
-    "foodEaten": [{
-        "gramsEaten": 56,
-        "food": {
-            "name": "Shrimp",
-            "proteinCountPerHundredGrams": 20
+    "name": "sasa",
+    "foodEaten": [
+        {
+            "gramsEaten": 67,
+            "food": {
+                "name": "Broccoli",
+                "proteinCountPerHundredGrams": 2.8
+            }
+        },
+        {
+            "gramsEaten": 56,
+            "food": {
+                "name": "Banana",
+                "proteinCountPerHundredGrams": 1.1
+            }
         }
-    }],
-    "proteinGoal": 135
+    ],
+    "proteinGoal": 34
 }
