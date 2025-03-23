@@ -1,6 +1,5 @@
 package model;
 
-
 import org.json.JSONObject;
 
 import persistence.Writable;
@@ -37,5 +36,10 @@ public class Food implements Writable {
         json.put("name", name);
         json.put("proteinCountPerHundredGrams", proteinCountPerHundredGrams);
         return json;
+    }
+
+    @Override
+    public String toString() {
+        return name + " has " + proteinCountPerHundredGrams + "g of protein for every 100g";
     }
 }
