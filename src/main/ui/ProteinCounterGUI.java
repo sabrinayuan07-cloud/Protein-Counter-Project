@@ -2,14 +2,19 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,7 +26,10 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 
+import org.json.JSONWriter;
+
 import model.Food;
+import model.FoodWithQty;
 import model.InvalidDoubleException;
 import model.MealPlan;
 
@@ -42,16 +50,16 @@ public class ProteinCounterGUI {
     private JButton btnAddFood;
     private JButton saveButton;
     private JList<Food> lstFoodOptions;
-    private JList<Food> lstFoodEaten;
-    private DefaultListModel<Food> storeFoodOptions;
-    private DefaultListModel<Food> storeFoodEaten;
+    private JList<FoodWithQty> lstFoodEaten;
+    private DefaultListModel<Food> storeFoodOptions = new DefaultListModel<>();
+    private DefaultListModel<FoodWithQty> storeFoodEaten = new DefaultListModel<>();
     private JPanel quantityPanel;
     private JPanel panelNameAndGoal;
-    private JPanel panelFood;
+    // private JPanel panelFood;
     private JPanel panelFoodToAdd;
     private JPanel panelFoodEatenAndSave;
-    private JPanel panelFour;
     private MealPlan mealPlan;
+    private JSONWriter jsonWriter;
 
     public ProteinCounterGUI() {
         setupFrameOne();
@@ -69,6 +77,8 @@ public class ProteinCounterGUI {
         btnLoadFile = new JButton("Load file");
         buttonPanel.add(btnCreateNewPlan);
         buttonPanel.add(btnLoadFile);
+
+        displayImage();
         JPanel panelMenuOptions = new JPanel(new GridBagLayout());
         panelMenuOptions.add(buttonPanel);
         frameStepOne.add(panelMenuOptions, BorderLayout.CENTER);
@@ -92,7 +102,6 @@ public class ProteinCounterGUI {
 
         // setupSaveButton();
 
-
         // REQUIRES:
         // MODIFIES:
         // EFFECTS:
@@ -110,8 +119,6 @@ public class ProteinCounterGUI {
     // EFFECTS:
     private void instantiateLists() {
         // add food options list in centre of panel 2
-        storeFoodOptions = new DefaultListModel<>();
-        storeFoodEaten = new DefaultListModel<>();
         storeFoodOptions.addElement(new Food("Chicken", 31));
         storeFoodOptions.addElement(new Food("Eggs", 13));
         storeFoodOptions.addElement(new Food("Milk", 3.3));
@@ -174,8 +181,6 @@ public class ProteinCounterGUI {
     // MODIFIES:
     // EFFECTS:
     private void setupFoodToAddPanel() {
-        // PANEL TWO CONTAINS FOOD OPTIONS + ADD FOOD BUTTON
-        // panelTwo.setLayout(null);
         panelFoodToAdd = new JPanel(new BorderLayout());
         panelFoodToAdd.setBackground(Color.BLUE);
         panelFoodToAdd.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -202,8 +207,6 @@ public class ProteinCounterGUI {
         quantityPanel.add(quantityLabel);
         quantityPanel.add(quantityEaten);
 
-        // panelTwo.add(quantityPanel, BorderLayout.SOUTH);
-
         btnAddFood = new JButton("Add food selected");
         panelFoodToAdd.add(btnAddFood, BorderLayout.PAGE_END);
 
@@ -218,15 +221,13 @@ public class ProteinCounterGUI {
         panelFoodEatenAndSave.setBackground(Color.MAGENTA);
         panelFoodEatenAndSave.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 
+        JLabel foodEatenLabel = new JLabel("Food eaten", JLabel.CENTER);
+        foodEatenLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        panelFoodEatenAndSave.add(foodEatenLabel, BorderLayout.NORTH);
+
         lstFoodEaten = new JList<>(storeFoodEaten);
-        lstFoodEaten.setModel(storeFoodEaten);
-
-        // lstFoodEaten.setModel(storeFoodOptions);
-        panelFoodEatenAndSave.add(lstFoodEaten);
-
-
-        // setupSaveButton();
         frameStepTwo.add(panelFoodEatenAndSave, BorderLayout.EAST);
+        panelFoodEatenAndSave.add(lstFoodEaten, BorderLayout.CENTER);
     }
 
     private void setupButtonActions() {
@@ -280,6 +281,9 @@ public class ProteinCounterGUI {
         });
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     private void setupButtonActionLoadFile() {
         btnLoadFile.addActionListener(new ActionListener() {
             @Override
@@ -289,6 +293,9 @@ public class ProteinCounterGUI {
         });
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     private void handleAddFood() {
         double quantity = 0;
         try {
@@ -300,20 +307,25 @@ public class ProteinCounterGUI {
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             return;
-        } 
+        }
         if (lstFoodOptions.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(frameStepTwo, "You must select a food item", "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
         Food selectedFood = lstFoodOptions.getSelectedValue();
+        storeFoodEaten.addElement(new FoodWithQty(selectedFood, quantity));
         mealPlan.addFood(selectedFood, quantity);
         JOptionPane.showMessageDialog(frameStepTwo, "Food successfully added", "Food added",
                 JOptionPane.INFORMATION_MESSAGE);
-        storeFoodEaten.addElement(selectedFood);
+
+        // each time we add a food, display in food eaten list
         quantityEaten.setText("");
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     private double handleGrams(String quantity) throws InvalidDoubleException {
         if (quantity == null) {
             JOptionPane.showMessageDialog(frameStepTwo, "Please enter a valid number", "Error",
@@ -338,20 +350,44 @@ public class ProteinCounterGUI {
         return grams;
     }
 
-    // private void setupSaveButton() {
-    //     saveButton = new JButton("Save");
-        
-    // }
+    private void setupSaveButton() {
+        saveButton = new JButton("Save");
+        panelFoodEatenAndSave.add(saveButton, BorderLayout.NORTH);
+    }
 
     // REQUIRES:
     // MODIFIES:
     // EFFECTS:
-    // private void setupSaveButton() {
-    //     btnShowAllFoods.addActionListener(new ActionListener() {
-    //         @Override
-    //         public void actionPerformed(ActionEvent e) {
-    //             displayFoodOptions.setModel(storeFoodOptions);
-    //         }
-    //     });
+    private void setupButtonActionSave() {
+        btnShowAllFoods.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // saveMealPlanToFile();
+            }
+        });
+    }
+
+    // private void saveMealPlanToFile() {
+    //     try {
+    //         jsonWriter.open();
+    //         jsonWriter.write(mealPlan);
+    //         jsonWriter.close(); // Close the writer
+    //         JOptionPane.showMessageDialog(null, "Meal plan saved successfully");
+    //     } catch (FileNotFoundException e) {
+    //         JOptionPane.showMessageDialog(null, "Unable to save meal plan.");
+    //     }
     // }
+
+    private void displayImage() {
+        try {
+            String imagePath = "./ProteinTracker.jpg";
+            // JsonReader reader = new JsonReader("./data/testReaderEmptyMealPlan.json");
+            ImageIcon image = new ImageIcon(imagePath);
+            JLabel imageLabel = new JLabel(image);
+
+            frameStepOne.add(imageLabel, BorderLayout.SOUTH);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
