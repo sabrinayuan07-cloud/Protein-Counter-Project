@@ -263,4 +263,15 @@ public class ProteinCounterApp {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+    // TODO
+    public MealPlan getMealPlanFromFile() {
+        try {
+            mealPlan = jsonReader.read();
+            System.out.println("Loaded " + mealPlan.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+        return mealPlan;
+    }
 }

@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -33,16 +36,14 @@ import model.Food;
 import model.FoodWithQty;
 import model.InvalidDoubleException;
 import model.MealPlan;
+import persistence.JsonReader;
 import persistence.JsonWriter;
 
 // Represents a GUI
 public class ProteinCounterGUI {
-    // frame one
     private JFrame frameStepOne;
     private JButton btnCreateNewPlan;
     private JButton btnLoadFile;
-
-    // frame two:
     private JFrame frameStepTwo;
     private JTextField name;
     private JTextField proteinGoal;
@@ -66,6 +67,8 @@ public class ProteinCounterGUI {
         frameStepOne.setVisible(true);
     }
 
+    // EFFECTS:
+    // MODIFIES:
     public void setupFrameOne() {
         frameStepOne = new JFrame("Meal Plan Application");
         frameStepOne.setSize(900, 600);
@@ -86,6 +89,8 @@ public class ProteinCounterGUI {
         setupButtonActionLoadFile();
     }
 
+    // EFFECTS:
+    // MODIFIES:
     public void setupFrameTwo() {
         instantiateLists();
         frameStepTwo.setSize(900, 600);
@@ -133,8 +138,30 @@ public class ProteinCounterGUI {
                 frameStepTwo = new JFrame("Loaded meal plan");
                 setupFrameTwo();
                 frameStepTwo.setVisible(true);
+                loadFile();
             }
         });
+    }
+
+    private void loadFile() {
+        try {
+            ProteinCounterApp proteinApp = new ProteinCounterApp(this.mealPlan);
+            this.mealPlan = proteinApp.getMealPlanFromFile();
+            name.setText(mealPlan.getName());
+            
+            proteinGoal.setText(String.valueOf(mealPlan.getProteinGoal()));
+            // add food eaten from file onto list displayed:
+            ArrayList<Food> foodsEaten = new ArrayList<>();
+            foodsEaten = mealPlan.getAllFoodEaten();
+            double quantity;
+
+            for (Food f : foodsEaten) {
+                quantity = mealPlan.getFoodQuantity(f);
+                storeFoodEaten.addElement(new FoodWithQty(f, quantity));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     // REQUIRES:
@@ -169,7 +196,6 @@ public class ProteinCounterGUI {
         name.setBounds(100, 20, 165, 25);
         panelNameAndGoal.add(name);
         // access user's name String
-
         // String userName = name.getText();
 
         JLabel labelProteinGoal = new JLabel("Protein Goal: ");
@@ -284,7 +310,6 @@ public class ProteinCounterGUI {
     }
 
     // TODO
-    // REQUIRES:
     // MODIFIES:
     // EFFECTS:
     private void setupButtonActionAddFood() {
@@ -297,7 +322,6 @@ public class ProteinCounterGUI {
     }
 
     // TODO
-    // REQUIRES:
     // MODIFIES:
     // EFFECTS:
     private void handleAddFood() {
@@ -383,20 +407,24 @@ public class ProteinCounterGUI {
     // MODIFIES:
     // EFFECTS:
     private void saveMealPlanToFile() {
-        if (name.getText() == null) {
-            mealPlan.setName("");
-            if (proteinGoal.getText() == null) {
-                mealPlan.setProteinGoal(0);
-            }
-        } else {
-            if (proteinGoal.getText() == null) {
-                mealPlan.setProteinGoal(0);
+        try {
+            if (name.getText() == null) {
+                mealPlan.setName(" ");
+                if (proteinGoal.getText() == null) {
+                    mealPlan.setProteinGoal(0);
+                }
             } else {
                 mealPlan.setName(name.getText());
-                mealPlan.setProteinGoal(Integer.parseInt(proteinGoal.getText()));
+                if (proteinGoal.getText() == null) {
+                    mealPlan.setProteinGoal(0);
+                } else {
+                    try {
+                        mealPlan.setProteinGoal(Integer.parseInt(proteinGoal.getText()));
+                    } catch (NumberFormatException e) {
+                        mealPlan.setProteinGoal(0);
+                    }
+                }
             }
-        }
-        try {
             ProteinCounterApp proteinApp = new ProteinCounterApp(this.mealPlan);
             proteinApp.saveMealPlan();
         } catch (FileNotFoundException e) {
