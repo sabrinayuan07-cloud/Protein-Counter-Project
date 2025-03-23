@@ -28,6 +28,17 @@ public class ProteinCounterApp {
         runProteinCounter();
     }
 
+    // TODO!!
+    // EFFECTS:
+    // REQUIRES:
+    // MODIFIES:
+    public ProteinCounterApp(MealPlan mealPlan) throws FileNotFoundException {
+       // mealPlan = new MealPlan(JSON_STORE, getProteinGoal())
+        this.mealPlan = mealPlan;
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+    }
+
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runProteinCounter() {

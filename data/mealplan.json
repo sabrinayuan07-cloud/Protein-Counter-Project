@@ -1,20 +1,11 @@
 {
-    "name": "sasa",
-    "foodEaten": [
-        {
-            "gramsEaten": 67,
-            "food": {
-                "name": "Broccoli",
-                "proteinCountPerHundredGrams": 2.8
-            }
-        },
-        {
-            "gramsEaten": 56,
-            "food": {
-                "name": "Banana",
-                "proteinCountPerHundredGrams": 1.1
-            }
+    "name": "Sabrina",
+    "foodEaten": [{
+        "gramsEaten": 60,
+        "food": {
+            "name": "Bacon",
+            "proteinCountPerHundredGrams": 37
         }
-    ],
-    "proteinGoal": 34
+    }],
+    "proteinGoal": 130
 }
