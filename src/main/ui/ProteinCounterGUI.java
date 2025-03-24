@@ -39,7 +39,7 @@ import model.MealPlan;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-// Represents a GUI
+// Represents GUI class
 public class ProteinCounterGUI {
     private JFrame frameStepOne;
     private JButton btnCreateNewPlan;
@@ -67,8 +67,7 @@ public class ProteinCounterGUI {
         frameStepOne.setVisible(true);
     }
 
-    // EFFECTS:
-    // MODIFIES:
+    // EFFECTS: sets up the first frame that user sees
     public void setupFrameOne() {
         frameStepOne = new JFrame("Meal Plan Application");
         frameStepOne.setSize(900, 600);
@@ -89,8 +88,7 @@ public class ProteinCounterGUI {
         setupButtonActionLoadFile();
     }
 
-    // EFFECTS:
-    // MODIFIES:
+    // EFFECTS: sets up the 2nd frame to be able to add a food and view food eaten
     public void setupFrameTwo() {
         instantiateLists();
         frameStepTwo.setSize(900, 600);
@@ -103,12 +101,8 @@ public class ProteinCounterGUI {
         setupSaveButton();
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: instantiates list of food options
     private void instantiateLists() {
-        // add food options list in centre of panel 2
         storeFoodOptions.addElement(new Food("Chicken", 31));
         storeFoodOptions.addElement(new Food("Eggs", 13));
         storeFoodOptions.addElement(new Food("Milk", 3.3));
@@ -122,18 +116,17 @@ public class ProteinCounterGUI {
         storeFoodOptions.addElement(new Food("Avocado", 2));
         storeFoodOptions.addElement(new Food("Banana", 1.1));
         storeFoodOptions.addElement(new Food("Bacon", 37));
-
+        
         lstFoodOptions = new JList<>(storeFoodOptions);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: user to click on load file button
+    // MODIFIES: this
+    // EFFECTS: sets up frame #2 and makes it visible
     private void setupButtonActionLoadFile() {
         btnLoadFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // mealPlan = new MealPlan("", 0);
                 frameStepOne.setVisible(false);
                 frameStepTwo = new JFrame("Loaded meal plan");
                 setupFrameTwo();
@@ -143,12 +136,13 @@ public class ProteinCounterGUI {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads meal plan from file
     private void loadFile() {
         try {
             ProteinCounterApp proteinApp = new ProteinCounterApp(this.mealPlan);
             this.mealPlan = proteinApp.getMealPlanFromFile();
             name.setText(mealPlan.getName());
-            
             proteinGoal.setText(String.valueOf(mealPlan.getProteinGoal()));
             // add food eaten from file onto list displayed:
             ArrayList<Food> foodsEaten = new ArrayList<>();
@@ -164,9 +158,8 @@ public class ProteinCounterGUI {
         }
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: user to click on create new plan button
+    // EFFECTS: creates new meal plan
     private void setupButtonActionCreateNewPlan() {
         btnCreateNewPlan.addActionListener(new ActionListener() {
             @Override
@@ -180,10 +173,7 @@ public class ProteinCounterGUI {
         });
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // EFFECTS: adds name and protein goal labels and text fields for user to input
     private void setupNameAndProteinPanel() {
         panelNameAndGoal = new JPanel(new GridLayout(2, 2));
         panelNameAndGoal.setBackground(Color.PINK);
@@ -195,10 +185,8 @@ public class ProteinCounterGUI {
         name = new JTextField(20);
         name.setBounds(100, 20, 165, 25);
         panelNameAndGoal.add(name);
-        // access user's name String
-        // String userName = name.getText();
 
-        JLabel labelProteinGoal = new JLabel("Protein Goal: ");
+        JLabel labelProteinGoal = new JLabel("Protein goal in grams: ");
         labelProteinGoal.setBounds(10, 20, 80, 25);
         panelNameAndGoal.add(labelProteinGoal);
 
@@ -206,17 +194,11 @@ public class ProteinCounterGUI {
         proteinGoal.setBounds(100, 20, 165, 25);
         panelNameAndGoal.add(proteinGoal);
 
-        // access user's protein goal
-        // String userProteinGoal = proteinGoal.getText();
-        // double userFinalProteinGoal = Double.parseDouble(userProteinGoal);
-        // this.mealPlan = new MealPlan(userName, userFinalProteinGoal);
         frameStepTwo.add(panelNameAndGoal, BorderLayout.NORTH);
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: sets up the panel to add food
     private void setupFoodToAddPanel() {
         panelFoodToAdd = new JPanel(new BorderLayout());
         panelFoodToAdd.setBackground(Color.BLUE);
@@ -250,10 +232,7 @@ public class ProteinCounterGUI {
         frameStepTwo.add(panelFoodToAdd, BorderLayout.WEST);
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // EFFECTS: adds panel that contains food eaten list and save button
     private void setupFoodEatenAndSavePanel() {
         panelFoodEatenAndSave = new JPanel(new BorderLayout());
         panelFoodEatenAndSave.setBackground(Color.MAGENTA);
@@ -268,16 +247,16 @@ public class ProteinCounterGUI {
         panelFoodEatenAndSave.add(lstFoodEaten, BorderLayout.SOUTH);
     }
 
+    // EFFECTS: calls all methods to set up buttons needed on frame 2
     private void setupButtonActions() {
         setupButtonActionForShowAllFoods();
         setupButtonActionForHighProteinFoods();
         setupButtonActionAddFood();
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: user to click on show all foods button
+    // MODIFIES: this
+    // EFFECTS: shows all food options
     private void setupButtonActionForShowAllFoods() {
         btnShowAllFoods.addActionListener(new ActionListener() {
             @Override
@@ -287,10 +266,9 @@ public class ProteinCounterGUI {
         });
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: user to click on only show high protein foods button
+    // MODIFIES: this
+    // EFFECTS: only shows high protein foods 
     private void setupButtonActionForHighProteinFoods() {
         btnShowHighProteinFoods.addActionListener(new ActionListener() {
             @Override
@@ -309,9 +287,9 @@ public class ProteinCounterGUI {
         });
     }
 
-    // TODO
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: user to click on add food button
+    // MODIFIES: this
+    // EFFECTS: calls handleAddFood() method
     private void setupButtonActionAddFood() {
         btnAddFood.addActionListener(new ActionListener() {
             @Override
@@ -321,9 +299,9 @@ public class ProteinCounterGUI {
         });
     }
 
-    // TODO
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: user must have selected a food item and input grams eaten to add food
+    // MODIFIES: this
+    // EFFECTS: adds food into food eaten list
     private void handleAddFood() {
         double quantity = 0;
         try {
@@ -349,10 +327,8 @@ public class ProteinCounterGUI {
         quantityEaten.setText("");
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: user must input a valid number before adding a food item
+    // EFFECTS: 
     private double handleGrams(String quantity) throws InvalidDoubleException {
         if (quantity == null) {
             JOptionPane.showMessageDialog(frameStepTwo, "Please enter a valid number", "Error",
@@ -377,20 +353,16 @@ public class ProteinCounterGUI {
         return grams;
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: adds save button to panel
     private void setupSaveButton() {
         saveButton = new JButton("Save");
         panelFoodEatenAndSave.add(saveButton, BorderLayout.NORTH);
         setupButtonActionSave();
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: user clicks on save button
+    // EFFECTS: calls save method and shows message that meal plan is saved
     private void setupButtonActionSave() {
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -402,10 +374,7 @@ public class ProteinCounterGUI {
         });
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // EFFECTS: saves meal plan to file
     private void saveMealPlanToFile() {
         try {
             if (name.getText() == null) {
@@ -432,10 +401,8 @@ public class ProteinCounterGUI {
         }
     }
 
-    // TODO
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+
+    // EFFECTS: displays image on frame 1
     private void displayImage() {
         try {
             String imagePath = "./ProteinTracker.jpg";

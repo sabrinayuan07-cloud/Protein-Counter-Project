@@ -54,4 +54,13 @@ public class TestFood {
         assertEquals("Bacon", json.get("name"));
         assertEquals(37.0, json.get("proteinCountPerHundredGrams"));
     }
+
+    @Test
+    public void testToString() {
+        assertEquals(testFoodBacon.toString(), "Bacon has 37.0g of protein for every 100g");
+        // @Override
+        // public String toString() {
+        //     return name + " has " + proteinCountPerHundredGrams + "g of protein for every 100g";
+        // }
+    }
 }

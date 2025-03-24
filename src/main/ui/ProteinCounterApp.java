@@ -28,12 +28,8 @@ public class ProteinCounterApp {
         runProteinCounter();
     }
 
-    // TODO!!
-    // EFFECTS:
-    // REQUIRES:
-    // MODIFIES:
+    // EFFECTS: assigns parameters to this.mealPlan
     public ProteinCounterApp(MealPlan mealPlan) throws FileNotFoundException {
-       // mealPlan = new MealPlan(JSON_STORE, getProteinGoal())
         this.mealPlan = mealPlan;
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -76,6 +72,7 @@ public class ProteinCounterApp {
         mealPlan = new MealPlan(name, proteinGoal);
     }
 
+    // EFFECTS: returns protein goal
     private double getProteinGoal() {
         double proteinGoal = 0;
         boolean proteinGoalEntered = false;
@@ -165,6 +162,7 @@ public class ProteinCounterApp {
         return foodSelected;
     }
 
+    // EFFECTS: shows summary of food eaten and protein progress
     private void proteinProgress() {
         int progress = mealPlan.getProgressPourcentage();
         System.out.println("You have now completed " + progress + "% of your protein goal");
@@ -264,7 +262,7 @@ public class ProteinCounterApp {
         }
     }
 
-    // TODO
+    // EFFECTS: loads meal plan from file and returns the meal plan
     public MealPlan getMealPlanFromFile() {
         try {
             mealPlan = jsonReader.read();

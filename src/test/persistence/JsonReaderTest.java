@@ -50,8 +50,8 @@ public class JsonReaderTest extends JsonTest {
             assertTrue(130 == mp.getProteinGoal());
             ArrayList<Food> foods = mp.getAllFoodEaten();
             assertEquals(2, foods.size());
-            checkFood("Chicken", 31, foods.get(0));
-            checkFood("Salmon", 22, foods.get(1));
+            checkFood("Chicken", 31, foods.get(1));
+            checkFood("Salmon", 22, foods.get(0));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

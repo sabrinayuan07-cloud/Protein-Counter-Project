@@ -9,20 +9,20 @@ public class FoodWithQty {
         this.quantity = quantity;
     }
 
-    public Double getQuantity() {
-        return this.quantity;
-    }
-
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
-
     public Food getFood() {
         return this.food;
     }
 
     public void setFood(Food food) {
         this.food = food;
+    }
+
+    public void setQty(Double quantity) {
+        this.quantity = quantity;
+    }
+
+    public Double getQty() {
+        return this.quantity;
     }
 
     @Override
