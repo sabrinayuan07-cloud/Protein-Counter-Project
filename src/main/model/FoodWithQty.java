@@ -1,9 +1,11 @@
 package model;
 
+// Represents a Food class with a quantity
 public class FoodWithQty {
     private Food food;
     private Double quantity;
     
+    // constructs a Food with a double quantity
     public FoodWithQty(Food food, Double quantity) {
         this.food = food;
         this.quantity = quantity;

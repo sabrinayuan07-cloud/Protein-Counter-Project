@@ -62,6 +62,7 @@ public class ProteinCounterGUI {
     private JPanel panelFoodEatenAndSave;
     private MealPlan mealPlan;
 
+    // Constructs the GUI class with its first frame
     public ProteinCounterGUI() {
         setupFrameOne();
         frameStepOne.setVisible(true);
@@ -116,7 +117,7 @@ public class ProteinCounterGUI {
         storeFoodOptions.addElement(new Food("Avocado", 2));
         storeFoodOptions.addElement(new Food("Banana", 1.1));
         storeFoodOptions.addElement(new Food("Bacon", 37));
-        
+
         lstFoodOptions = new JList<>(storeFoodOptions);
     }
 
@@ -144,6 +145,7 @@ public class ProteinCounterGUI {
             this.mealPlan = proteinApp.getMealPlanFromFile();
             name.setText(mealPlan.getName());
             proteinGoal.setText(String.valueOf(mealPlan.getProteinGoal()));
+            
             // add food eaten from file onto list displayed:
             ArrayList<Food> foodsEaten = new ArrayList<>();
             foodsEaten = mealPlan.getAllFoodEaten();

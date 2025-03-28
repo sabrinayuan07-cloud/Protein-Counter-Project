@@ -9,6 +9,7 @@ public class Food implements Writable {
     private String name; // name of food item
     private double proteinCountPerHundredGrams; // protein count per 100grams
 
+    // constructs a Food with a name and protein count
     public Food(String name, double proteinCountPerHundredGrams) {
         this.name = name;
         this.proteinCountPerHundredGrams = proteinCountPerHundredGrams; // > 0
