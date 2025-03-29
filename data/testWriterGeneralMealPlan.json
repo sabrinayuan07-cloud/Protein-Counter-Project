@@ -2,17 +2,17 @@
     "name": "My meal plan",
     "foodEaten": [
         {
-            "gramsEaten": 200,
-            "food": {
-                "name": "Chicken",
-                "proteinCountPerHundredGrams": 31
-            }
-        },
-        {
             "gramsEaten": 150,
             "food": {
                 "name": "Salmon",
                 "proteinCountPerHundredGrams": 22
+            }
+        },
+        {
+            "gramsEaten": 200,
+            "food": {
+                "name": "Chicken",
+                "proteinCountPerHundredGrams": 31
             }
         }
     ],

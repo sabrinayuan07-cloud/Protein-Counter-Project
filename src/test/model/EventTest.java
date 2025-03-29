@@ -29,6 +29,8 @@ public class EventTest {
 	public void testEvent() {
 		assertEquals("Sensor open at door", e.getDescription());
 		assertEquals(d, e.getDate());
+        // assertEquals(Math.abs(e.getDate().getTime()) - d.getTime(), -6.0);
+        // assertEquals(200.0, foodWithQty.getQty(), 0.01);
 	}
 
 	@Test

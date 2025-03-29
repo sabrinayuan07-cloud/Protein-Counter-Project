@@ -5,7 +5,9 @@ import java.util.Date;
 
 // SOURCE: from Alarm System application
 
-// Represents a food tracker event
+/**
+ * Represents an alarm system event.
+ */
 public class Event {
     private static final int HASH_CONSTANT = 13;
     private Date dateLogged;

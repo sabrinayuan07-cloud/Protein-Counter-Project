@@ -15,6 +15,7 @@ public class MealPlan implements Writable {
     private HashMap<Food, Double> foodEaten;
     private String name;
     private double proteinGoal;
+    private Event eventAddFood;
 
     public MealPlan(String name, double proteinGoal) {
         foodEaten = new HashMap<Food, Double>();
@@ -48,6 +49,7 @@ public class MealPlan implements Writable {
             } else {
                 foodEaten.put(food, grams);
             }
+            EventLog.getInstance().logEvent(new Event(grams + "g of " + food.getName() + " added to meal plan"));
         }
     }
 
@@ -81,6 +83,7 @@ public class MealPlan implements Writable {
 
     public void setName(String name) {
         this.name = name;
+        EventLog.getInstance().logEvent(new Event("Set user name to: " + name));
     }
 
     public double getProteinGoal() {
@@ -89,6 +92,7 @@ public class MealPlan implements Writable {
 
     public void setProteinGoal(int proteinGoal) {
         this.proteinGoal = proteinGoal;
+        EventLog.getInstance().logEvent(new Event("Set protein goal to: " + proteinGoal));
     }
 
     // EFFECTS: returns things in this mealplan as a JSON array
