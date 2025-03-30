@@ -32,3 +32,6 @@ Sat Mar 29 19:10:17 PDT 2025
 33.0g of Bacon added to meal plan
 Sat Mar 29 19:10:20 PDT 2025
 22.0g of Salmon added to meal plan
+
+## Phase 4: Task 3
+If I had more time to work on my project, I would refactor the methods in my ProteinCounterApp class where I call JsonReader and JsonWriter, specifically when saving and loading a meal plan from file. I would place these methods in a separate class in order to have the ProteinCounterApp class focus more on creating the application and less and saving and loading the file. this will help to improve code readability.

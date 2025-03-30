@@ -55,12 +55,10 @@ import persistence.JsonWriter;
 // Represents GUI class
 public class ProteinCounterGUI extends JFrame implements WindowListener, WindowFocusListener, WindowStateListener {
     private JPanel panelStepOne;
-
     private JPanel mainContainer;
     private JButton btnCreateNewPlan;
     private JButton btnLoadFile;
     private JPanel panelStepTwo;
-    
     private JTextField name;
     private JTextField proteinGoal;
     private JTextField quantityEaten;
@@ -79,29 +77,20 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
     private MealPlan mealPlan;
     private CardLayout cardLayout;
 
-
     // Constructs the GUI class with its first frame
     public ProteinCounterGUI() {
         super("Protein Couter Application");
         setSize(900, 600);
-
-        // this.setLayout(new BorderLayout());
        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         setUpMainContainer();
         setupPanelOne();
         setupPanelTwo();
-
-
-        // setupFrameTwo();
         addWindowListener(this);
         addWindowFocusListener(this);
         addWindowStateListener(this);
-        // checkWM();
         setVisible(true);
-
     }
 
     // EFFECTS: sets up the first frame that user sees
@@ -109,55 +98,18 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
         panelStepOne = new JPanel();
         panelStepOne.setBackground(Color.CYAN);
         panelStepOne.setLayout(new BorderLayout());
-
-        // frameStepOne = new JPanel(new BorderLayout());
-        // this.add(frameStepOne, BorderLayout.CENTER);
-        // frameStepOne.setSize(900, 600);
-
-
-        // frameStepOne.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        // frameStepOne.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-                // Add a WindowListener to handle the close event
-                // frameStepOne.addWindowListener(new WindowAdapter() {
-        //     @Override
-        //     public void windowClosing(WindowEvent e) {
-        //         // Log the events to the console before closing
-        //         System.out.println("Application is closing. Here are the events:");
-        //         for (Event event : EventLog.getInstance()) {
-        //             System.out.println(event);
-        //         }
-
-        //         frameStepOne.dispose();
-
-        //         // System.exit(int)
-        //         System.exit(0);
-        //     }
-        // });
-        
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         btnCreateNewPlan = new JButton("Create new meal plan");
         btnLoadFile = new JButton("Load file");
         buttonPanel.add(btnCreateNewPlan);
         buttonPanel.add(btnLoadFile);
-
         displayImage();
         JPanel panelMenuOptions = new JPanel(new GridBagLayout());
         panelMenuOptions.add(buttonPanel);
-
-        // since we changed the layout, no longer needed:
-        // frameStepOne.add(panelMenuOptions, BorderLayout.CENTER);
-
         panelStepOne.add(panelMenuOptions);
-
         setupButtonActionCreateNewPlan();
         setupButtonActionLoadFile();
-
         mainContainer.add(panelStepOne, "Welcome to the protein counter application");
-        
-        // frameStepOne.setVisible(true);
-        // setVisible(true);
     }
 
     private void setUpMainContainer() {
@@ -173,19 +125,9 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
         panelStepTwo = new JPanel();
         panelStepTwo.setBackground(Color.GREEN);
         panelStepTwo.setLayout(new BorderLayout());
-
-        // frameStepTwo = new JPanel(new BorderLayout());
-        // this.add(frameStepTwo, BorderLayout.CENTER);
-        // frameStepTwo.setVisible(false);
-        // frameStepTwo.setSize(900, 600);
-        // frameStepTwo.setLayout(new BorderLayout());
-
         setupNameAndProteinPanel();
         setupFoodToAddPanel();
-
-      
         panelStepTwo.add(quantityPanel, BorderLayout.SOUTH);
-
         setupFoodEatenAndSavePanel();
         setupButtonActions();
         setupSaveButton();
@@ -220,15 +162,7 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainContainer, "Protein Counter Application");
-
-                // setVisible(false);
-                // frameStepOne.setVisible(false);
-
-                // frameStepTwo = new JFrame("Loaded meal plan");
-                // setupFrameTwo();
-
                 panelStepTwo.setVisible(true);
-                // setVisible(true);
                 loadFile();
             }
         });
@@ -267,12 +201,6 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
 
                 mealPlan = new MealPlan("", 0);
                 panelStepTwo.setVisible(true);
-                // frameStepOne.setVisible(false);
-
-                // frameStepTwo = new JFrame("Creating new meal plan");
-                // setupFrameTwo();
-
-                // frameStepTwo.setVisible(true);
             }
         });
     }
@@ -509,19 +437,6 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
         }
     }
 
-    // displayMessage("WindowListener method called: windowClosing.");
-    //     //A pause so user can see the message before
-    //     //the window actually closes.
-    //     ActionListener task = new ActionListener() {
-    //         boolean alreadyDisposed = false;
-    //         public void actionPerformed(ActionEvent e) {
-    //             if (frame.isDisplayable()) {
-    //                 alreadyDisposed = true;
-    //                 frame.dispose();
-    //             }
-    //         }
-
-
     // EFFECTS: displays image on frame 1
     private void displayImage() {
         try {
@@ -535,6 +450,8 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
         }
     }
 
+
+    // SOURCE: FROM ORACLE'S WINDOW TUTORIAL
     @Override
     public void windowStateChanged(WindowEvent e) {
     }

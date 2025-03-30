@@ -15,7 +15,6 @@ public class MealPlan implements Writable {
     private HashMap<Food, Double> foodEaten;
     private String name;
     private double proteinGoal;
-    private Event eventAddFood;
 
     public MealPlan(String name, double proteinGoal) {
         foodEaten = new HashMap<Food, Double>();
