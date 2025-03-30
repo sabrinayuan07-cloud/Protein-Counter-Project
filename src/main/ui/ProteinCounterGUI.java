@@ -413,7 +413,7 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
     private void handleAddFood() {
         double quantity = 0;
         try {
-            System.out.println(quantityEaten.getText());
+            // System.out.println(quantityEaten.getText());
             quantity = handleGrams(quantityEaten.getText());
         } catch (InvalidDoubleException e) {
             System.out.println(e.getLocalizedMessage());
@@ -537,27 +537,22 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
 
     @Override
     public void windowStateChanged(WindowEvent e) {
-        System.out.println("\nWindowStateListener method called: windowStateChanged.");
     }
 
     @Override
     public void windowGainedFocus(WindowEvent e) {
-        System.out.println("\nWindowFocusListener method called: windowGainedFocus.");
     }
 
     @Override
     public void windowLostFocus(WindowEvent e) {
-        System.out.println("\nWindowFocusListener method called: windowLostFocus.");
     }
 
     @Override
     public void windowOpened(WindowEvent e) {
-        System.out.println("\nWindowListener method called: windowOpened.");
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-        System.out.println("\nWindowListener method called: windowClosing.");
         Iterator<Event> events = EventLog.getInstance().iterator();
         while (events.hasNext()) {
             Event event = events.next();
@@ -567,101 +562,21 @@ public class ProteinCounterGUI extends JFrame implements WindowListener, WindowF
 
     @Override
     public void windowClosed(WindowEvent e) {
-        System.out.println("\nWindowListener method called: windowClosed.");
     }
 
     @Override
     public void windowIconified(WindowEvent e) {
-        System.out.println("\nWindowListener method called: windowIconified.");
     }
 
     @Override
     public void windowDeiconified(WindowEvent e) {
-        System.out.println("\nWindowListener method called: windowDeiconified.");
     }
 
     @Override
     public void windowActivated(WindowEvent e) {
-        System.out.println("\nWindowListener method called: windowActivated.");
     }
 
     @Override
     public void windowDeactivated(WindowEvent e) {
-        System.out.println("\nWindowListener method called: windowDeactivated.");
     }
-
-    // public void checkWM() {
-    //     Toolkit tk = this.getToolkit();
-    //     if (!(tk.isFrameStateSupported(Frame.ICONIFIED))) {
-    //         System.out.println(
-    //                 "Your window manager doesn't support ICONIFIED.");
-    //     }  else System.out.println(
-    //             "Your window manager supports ICONIFIED.");
-    //     if (!(tk.isFrameStateSupported(Frame.MAXIMIZED_VERT))) {
-    //         System.out.println(
-    //                 "Your window manager doesn't support MAXIMIZED_VERT.");
-    //     }  else System.out.println(
-    //             "Your window manager supports MAXIMIZED_VERT.");
-    //     if (!(tk.isFrameStateSupported(Frame.MAXIMIZED_HORIZ))) {
-    //         System.out.println(
-    //                 "Your window manager doesn't support MAXIMIZED_HORIZ.");
-    //     } else System.out.println(
-    //             "Your window manager supports MAXIMIZED_HORIZ.");
-    //     if (!(tk.isFrameStateSupported(Frame.MAXIMIZED_BOTH))) {
-    //         System.out.println(
-    //                 "Your window manager doesn't support MAXIMIZED_BOTH.");
-    //     } else {
-    //         System.out.println(
-    //                 "Your window manager supports MAXIMIZED_BOTH.");
-    //     }
-    // }
-
-
-
-
-    // SOURCE FROM DEMO:
-
-    // void displayMessage(String msg) {
-    //     display.append(msg + newline);
-    //     System.out.println(msg);
-    // }
-
-    // void displayStateMessage(String prefix, WindowEvent e) {
-    //     int state = e.getNewState();
-    //     int oldState = e.getOldState();
-    //     String msg = prefix
-    //                + newline + space
-    //                + "New state: "
-    //                + convertStateToString(state)
-    //                + newline + space
-    //                + "Old state: "
-    //                + convertStateToString(oldState);
-    //     displayMessage(msg);
-    // }
-
-    // String convertStateToString(int state) {
-    //     if (state == Frame.NORMAL) {
-    //         return "NORMAL";
-    //     }
-    //     String strState = " ";
-    //     if ((state & Frame.ICONIFIED) != 0) {
-    //         strState += "ICONIFIED";
-    //     }
-    //     //MAXIMIZED_BOTH is a concatenation of two bits, so
-    //     //we need to test for an exact match.
-    //     if ((state & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH) {
-    //         strState += "MAXIMIZED_BOTH";
-    //     } else {
-    //         if ((state & Frame.MAXIMIZED_VERT) != 0) {
-    //             strState += "MAXIMIZED_VERT";
-    //         }
-    //         if ((state & Frame.MAXIMIZED_HORIZ) != 0) {
-    //             strState += "MAXIMIZED_HORIZ";
-    //         }
-    //         if (" ".equals(strState)){
-    //             strState = "UNKNOWN";
-    //         }
-    //     }
-    //     return strState.trim();
-    // }
 }

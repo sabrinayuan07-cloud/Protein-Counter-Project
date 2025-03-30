@@ -1,11 +1,11 @@
 {
-    "name": "jeijo",
+    "name": "sasa",
     "foodEaten": [{
-        "gramsEaten": 110,
+        "gramsEaten": 44,
         "food": {
-            "name": "Chicken",
-            "proteinCountPerHundredGrams": 31
+            "name": "Salmon",
+            "proteinCountPerHundredGrams": 22
         }
     }],
-    "proteinGoal": 99
+    "proteinGoal": 135
 }

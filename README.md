@@ -26,3 +26,5 @@ Why is this project of interest to you?
 - You can locate my visual component by looking at the pop-up image that shows up once you have added a food item, where it will say "Food item successfully added"
 - You can save the state of my application by clicking the button "save file" 
 - You can reload the state of my application by clicking the option to "load file" at the beginning
+
+## Phase 4: Task 2
