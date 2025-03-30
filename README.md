@@ -28,3 +28,7 @@ Why is this project of interest to you?
 - You can reload the state of my application by clicking the option to "load file" at the beginning
 
 ## Phase 4: Task 2
+Sat Mar 29 19:10:17 PDT 2025
+33.0g of Bacon added to meal plan
+Sat Mar 29 19:10:20 PDT 2025
+22.0g of Salmon added to meal plan
